@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  build_pipeline:
+    runs-on: ubuntu-latest
+    name: Run assembly and compare binaries
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Merlin
+      uses: digarok/install-merlin32-action@v0.1.0
+
+    - name: Assemble Source
+      run: chmod +x build.sh ; ./build.sh
+
+    - name: Super Complex Parity Check Algorithm
+      run: diff src/twgs_1.8s/twgs rom/twgs_1.8s/twgs-rom.bin
+
